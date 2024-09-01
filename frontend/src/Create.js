@@ -41,6 +41,7 @@ const Create = () => {
             });
     };
     console.log(state)
+    console.log({handleSubmit});
     return (
 
         <div className="container p-5">

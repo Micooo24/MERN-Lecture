@@ -15,7 +15,7 @@ exports.create = async (req, res) => {
             
     }
     // create post
-    
+
     
    const post =  await Post.create({ title, content, user, slug })
     return res.status(200).json(post);
@@ -41,4 +41,36 @@ exports.read = async (req, res) => {
     if(!post)
         return res.status(400).json({ error: 'api error' })
     return res.status(200).json(post);
+};
+
+// exports.update = async (req,res) =>{
+//     const {title, content, user} = req.body;
+//     const slug = slugify(title);
+
+//     const post =  await Post.findOneAndUpdate({ title, content, user, slug })
+//     return res.status(200).json(post);
+
+// }
+
+
+exports.update = async (req, res) => {
+    const { title, content, user } = req.body;
+    const { slug } = req.params; // Assuming you use the slug to identify the post
+    const newSlug = slugify(title);
+
+    try {
+        const post = await Post.findOneAndUpdate(
+            { slug }, // Find the post by slug
+            { title, content, user, slug: newSlug }, // Update the fields
+            { new: true } // Return the updated document
+        );
+
+        if (!post) {
+            return res.status(404).json({ error: 'Post not found' });
+        }
+
+        return res.status(200).json(post);
+    } catch (error) {
+        return res.status(400).json({ error: 'Error updating post' });
+    }
 };
