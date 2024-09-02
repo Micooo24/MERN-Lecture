@@ -74,3 +74,32 @@ exports.update = async (req, res) => {
         return res.status(400).json({ error: 'Error updating post' });
     }
 };
+
+
+exports.remove = async (req, res) => {
+    const { title, content, user } = req.body;
+    const { slug } = req.params; // Assuming you use the slug to identify the post
+    try {
+
+        const post = await Post.findOneAndDelete(
+            { slug }, 
+            {title, content, user}
+        );
+
+        
+        if (!post) {
+            return res.status(404).json({ error: 'Post not found' });
+        }
+
+        return res.status(200).json(post);
+
+
+    }catch (error) {
+        return res.status(400).json({ error: 'Error deleting post' });
+    }
+
+
+
+};
+
+

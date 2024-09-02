@@ -114,7 +114,7 @@ const Update = () => {
             .then(response => {
                 console.log(response);
                 alert(`Post titled "${response.data.title}" is updated`);
-                navigate('/posts'); // Redirect to the list of posts
+                navigate('/'); // Redirect to the list of posts
             })
             .catch(error => {
                 console.log(error.response);

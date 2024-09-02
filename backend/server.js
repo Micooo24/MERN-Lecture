@@ -24,9 +24,10 @@ app.use(express.json());
 
 
 
-app.use('/api', postRoutes);
+
 
 // route
+app.use('/api', postRoutes);
 
 
 // port

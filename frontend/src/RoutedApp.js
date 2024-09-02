@@ -4,6 +4,8 @@ import App from './App';
 import Create from './Create';
 import Update from './Update';
 import SinglePost from './SinglePost';
+
+
 const RoutedApp = () => {
     return (
         <Router>
@@ -12,6 +14,8 @@ const RoutedApp = () => {
                 <Route path="/create" exact="true" element={<Create />} />
                 <Route path="/post/:slug" exact="true" element={<SinglePost />} />
                 <Route path="/edit/post/:slug" exact="true" element={<Update />} />
+             
+                {/* <Route path="/delete/post/:slug" exact="true" element={<Delete/>} /> */}
             </Routes>
         </Router>
     )
